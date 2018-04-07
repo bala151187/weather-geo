@@ -28,9 +28,6 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://us.gcr.io/devops-200301', 'gcr:google_CR') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-        }
+        sh "gcloud docker -- push us.gcr.io/devops-200301/${env.BUILD_NUMBER}:latest"
     }
 }
