@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: weather-geo
+    name: weather-geo
+    type: web
+  name: weather-geo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather-geo
+      name: weather-geo
+      type: web
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: weather-geo
+        name: weather-geo
+        type: web
+      name: weather-geo
+    spec:
+      containers:
+      - image: {{image}}
+        imagePullPolicy: IfNotPresent
+        name: weather-geo
+        ports:
+        - containerPort: 3001
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

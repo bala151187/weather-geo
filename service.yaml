@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: weather-geo
+    type: web
+  name: weather-geo
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 3001
+  selector:
+    app: weather-geo
+    type: web
+---
