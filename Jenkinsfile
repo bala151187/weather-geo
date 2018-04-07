@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("weather-geo:${env.BUILD_ID}")
+        app = docker.build("us.gcr.io/devops-200301/weather-geo:${env.BUILD_ID}")
     }
 
     stage('Test image') {
@@ -28,6 +28,6 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        sh "gcloud docker -- push us.gcr.io/devops-200301/${env.BUILD_NUMBER}:latest"
+        sh "gcloud docker -- push us.gcr.io/devops-200301/weather-geo:${env.BUILD_NUMBER}"
     }
 }
