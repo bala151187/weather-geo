@@ -28,7 +28,7 @@ spec:
       name: weather-geo
     spec:
       containers:
-      - image: {{image}}
+      - image: us.gcr.io/devops-200301/weather-geo:latest
         imagePullPolicy: IfNotPresent
         name: weather-geo
         ports:
