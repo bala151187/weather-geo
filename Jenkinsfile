@@ -36,7 +36,7 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        sh $"sed -i s/{{image}}/us.gcr.io\/devops-200301\/weather-geo:${env.BUILD_NUMBER}/g index.html"$
+        sh "sed -i s/{{image}}/us.gcr.io/devops-200301/weather-geo:${env.BUILD_NUMBER}/g index.html"
         sh "kubectl create -f deployment.yaml"
     }
 }
