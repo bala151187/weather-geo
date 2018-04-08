@@ -33,7 +33,7 @@ node {
     
     stage('Deploy to kubernetes') {
         kubernetesDeploy(kubeconfigId: 'kubernetes_GCP',             
-                 configs: '**/deployment.yaml',
+                 configs: '**/deployment.yaml','**/service.yaml',
                  enableConfigSubstitution: true
         )
     }
