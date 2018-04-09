@@ -30,16 +30,13 @@ node {
          * Pushing multiple tags is cheap, as all the layers are reused. */
         sh "gcloud docker -- push us.gcr.io/devops-200301/weather-geo:latest"
     }
-     stage('Check Connection to k8s') {
+     stage('Check And Deploy to K8s') {
          withKubeConfig(caCertificate: '', credentialsId: 'kubernetes_gcp_raw', serverUrl: 'https://35.193.109.253') {
              sh 'kubectl get pods'
-}
-
+             sh 'kubectl delete -f deployment.yaml'
+             sh 'kubectl delete -f service.yaml'
+             sh 'kubectl create -f deployment.yaml'
+             sh 'kubectl create -f service.yaml'
+        }
     }  
-    stage('Deploy to kubernetes') {
-        kubernetesDeploy(kubeconfigId: 'kubernetes_GCP',             
-                 configs: '**/*.yaml',
-                 enableConfigSubstitution: true
-        )
-    }
 }
